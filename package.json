@@ -4,8 +4,7 @@
   "description": "Realtime chat app with rooms",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
-    "dev": "nodemon server"
+    "start": "node server"
   },
   "author": "Shaylen Anita",
   "license": "MIT",
@@ -13,8 +12,5 @@
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "socket.io": "^4.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
   }
 }

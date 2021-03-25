@@ -1,25 +1,62 @@
-const fs = require("fs");
+const User = require("./User");
+const Post = require("./Post");
+const Vote = require("./Vote");
+const Comment = require("./Comment");
 
-const db = {};
-
-fs.readdirSync(__dirname)
-  .filter((file) => {
-    return (
-      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
-    );
-  })
-  .forEach((file) => {
-    const model = require(path.join(__dirname, file))(sequelize, DataTypes);
-    db[model.name] = model;
-  });
-
-Object.keys(db).forEach((modelName) => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
+//model associations
+User.hasMany(Post, {
+  foreignKey: "user_id",
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+Post.belongsTo(User, {
+  foreignKey: "user_id",
+});
 
-module.exports = db;
+//using a Through table
+User.belongsToMany(Post, {
+  through: Vote,
+  as: "voted_posts",
+  foreignKey: "user_id",
+});
+
+//using a Through table
+Post.belongsToMany(User, {
+  through: Vote,
+  as: "voted_posts",
+  foreignKey: "post_id",
+});
+
+Vote.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+Vote.belongsTo(Post, {
+  foreignKey: "post_id",
+});
+
+User.hasMany(Vote, {
+  foreignKey: "user_id",
+});
+
+Post.hasMany(Vote, {
+  foreignKey: "post_id",
+});
+
+//Comment.....
+Comment.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+Comment.belongsTo(Post, {
+  foreignKey: "post_id",
+});
+
+User.hasMany(Comment, {
+  foreignKey: "user_id",
+});
+
+Post.hasMany(Comment, {
+  foreignKey: "post_id",
+});
+
+module.exports = { User, Post, Vote, Comment };

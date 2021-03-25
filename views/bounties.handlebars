@@ -1,0 +1,39 @@
+<table id='top'>
+<tr>
+  <td style="width: 90%;">
+{{#each posts as |post|}}
+<li>
+  {{> forum-info post}}
+</li>
+
+{{> comment-info post.comments}}
+
+<br><hr>
+{{!-- Comment: This is for the post --}}
+{{/each}}
+
+{{!-- {{#if loggedIn}} --}}
+<script src="/javascript/comment-forum.js"></script>
+{{!-- {{/if}} --}}
+</td>
+<td style="border-left-style: solid;">
+  <section class="headlinePosts">
+  {{#each posts as |post|}}
+  <a href="#{{post.id}}">
+  <div style="height: 100px; border:1px black solid; ">
+  <h4>{{post.title}}</h4>
+  </div>
+  </a>
+  {{/each}}
+  </section>
+
+  {{!-- Relative button to go to top --}}
+  <a href="#top">
+  <div class="headlineBackTop">
+    <h4>Back to the top!</h4>
+  </div>
+  </a>
+
+</td>
+</tr>
+</table>

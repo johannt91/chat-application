@@ -1,0 +1,239 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.edit-input {
+  background-color: #e4e4e4;
+  color: rgb(63, 63, 63);
+  font-size: 1.7vw;
+}
+
+
+.btn-dark {
+  background-color: #000;
+  color: #ccc;
+  margin: auto;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.login-form {
+  width: 30%;
+  margin: auto;
+  padding: 0 2%;
+  border: 1px solid;
+  border-radius: 30px;
+  background-color: #ccc;
+}
+
+.login-btn {
+  margin: 0 auto 6% auto;
+  width: 25%;
+}
+
+.register-form {
+  width: 50%;
+  margin: 0 auto 5% auto;
+  background-color: #ccc;
+  padding: 1% 2% 2%;
+  border: 1px solid;
+  border-radius: 30px;
+}
+
+.form-control {
+  height: 4vw;
+  margin-bottom: 2%;
+}
+
+li {
+  list-style-type: none;
+}
+
+.commentAlignment{
+  margin-left: 15%;
+  margin-right: 10%;
+}
+
+.cardWithComments{
+  /*border: 1px solid;*/
+  margin-bottom: 0;
+  padding: 15px;
+
+  text-align: center;
+}
+
+.headlinePosts{
+  position: absolute;
+  top: 100px;
+  bottom: 0px;
+}
+
+.headlinePost-title{
+  display:flex;
+  align-items: center;
+}
+
+.headlinePosts div:hover{
+  background-color: lightblue;
+}
+
+.headlineBackTop {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  text-align: center;
+  /*border: 2px solid lightblue;*/
+  background-color:lightblue ;
+}
+/* PERSONAL PROFILE STYLES */
+.profile {
+  background-color: #ccc;
+}
+
+.page-title {
+  width: 50%;
+  margin: auto;
+}
+
+.page-title h2 {
+  font-size: 3.5vw;
+}
+
+.post-form {
+  width: 50%;
+  margin: 0 auto 8% auto;
+  padding: 0 2% 2% 2%;
+}
+
+.user-bio {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+
+.user-about {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-left: 2%;
+  margin-right: 10%;
+  font-size: 1.1vw;
+  line-height: 1.5;
+}
+
+.user-bio img {
+  height: 250px;
+  width: 250px;
+  margin: 30px 30px 0 30px;
+  border-radius: 50%;
+}
+
+.edit-post-btn {
+  width: 5%;
+  margin: 0 auto 5% auto;
+}
+/*  END */
+
+
+
+  /* USER PROFILES STYLE START */
+  .page-title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3%;
+  }
+
+  .page-title h1{
+    border-bottom: 1px solid;
+  }
+
+  .user-profiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5%;
+    padding: 0 8%;
+  }
+
+  .card {
+    border: 1px solid;
+    margin-bottom: 15%;
+    padding: 15px;
+    transition: box-shadow 1s;
+  }
+
+  .card:hover {
+    box-shadow: 0 0 3px #515151;
+  }
+
+  .card-title {
+    font-size: 1.5vw;
+  }
+
+  .profile-card-img {
+    height: 275px;
+    width: 200px;
+    margin: auto;
+  }
+
+  .profile-links {
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile-links a {
+    margin: 0 3%;
+  }
+  /* USER PROFILE STYLE END */
+
+/******************************************/
+
+  /* EDIT POST FORM START */
+
+  .edit-post-form {
+    width: 50%;
+    margin: auto;
+    padding: 0 2%;
+    border: 1px solid;
+    border-radius: 30px;
+  }
+
+  .post-details {
+    margin-bottom: 3%;
+  }
+
+  .button-options {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 5%;
+  }
+
+  .comment-form {
+    width: 30%;
+    margin: auto;
+    padding-top: 3%;
+  }
+  /* EDIT POST FORM END */
+
+  footer {
+    position: sticky;
+    top: 100%;
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    padding: 1%;
+    font-size: 110%;
+  }
+  

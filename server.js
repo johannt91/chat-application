@@ -1,23 +1,35 @@
-const path = require('path');
-const http = require('http');
+//======= DEPENDENCIES ========//
 const express = require('express');
 const socketio = require('socket.io');
+const routes = require('./controllers');
+const sequelize = require('./config/connection');
+const path = require('path');
+const http = require('http');
+const session = require('express-session');
+const helpers = require('./utils/helpers');
+const exphbs = require('express-handlebars');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
 const formatMessage = require('./utils/messages')
 const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('./utils/user')
-const { disconnect } = require('process');
+
+
+const hbs = exphbs.create({ helpers });
+
 
 const app = express();
-const server = http.createServer(app);
+const server = http.Server(app);
 const io = socketio(server);
 
-//Set Static folder
-app.use(express.static(path.join(__dirname,'public')));
-
-const botName = 'Coders Bot';
+const PORT = process.env.PORT || 3001;
 //Run when client connects
 io.on('connection', socket => {
+    console.log('CONNECTED!!!!')
 socket.on('joinRoom', ({ username, room }) => {
+    console.log({ username, room })
     const user = userJoin(socket.id, username, room);
+
+    console.log({ user })
     
     socket.join(user.room);
 
@@ -34,7 +46,7 @@ socket.on('joinRoom', ({ username, room }) => {
       room: user.room, 
       users: getRoomUsers(user.room)
        });
-    });
+});
 
   //Listen for chatMessage
   socket.on('chatMessage', (msg) => {
@@ -62,10 +74,37 @@ socket.on('joinRoom', ({ username, room }) => {
        });
 });
 
+const sess = {
+    secret: 'Super secret secret',
+    cookie: {},
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+        db: sequelize
+    })
+};
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(session(sess));
+
+//===== HANDLEBARS TEMPLATE ENGINE =====//
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
+//===== TURN ON ROUTES =====//
+app.use(routes);
+
+const botName = 'Coders Bot';
 
 
-const PORT = 3001  || process.env.PORT;
+//===== TURN ON CONNECTION TO DB AND SERVER =====//
+sequelize.sync({ force: false }).then(() => {
+    server.listen(PORT, () => console.log(`NOW LISTENING ON PORT ${PORT}`));
+})
 
-
-
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+module.exports = {
+    io
+}
